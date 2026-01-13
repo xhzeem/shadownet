@@ -5,14 +5,14 @@ ShadowNet is a consolidated pentest lab contained within a single machine (Docke
 ## Services & Vulnerabilities Verified
 
 ### 1. Web Applications
-- **ShadowCorp Internal Portal (Port 8080):**
-  - **Auth System (SQLi):** Verified bypass on `/login`.
-  - **CorpFeed (XSS):** Verified stored script reflection on `/feed`.
-  - **Personnel Directory (IDOR):** Verified unauthorized access to profiles on `/directory/<id>`.
-  - **NetTools (RCE/SSRF):** Verified command injection and service probing on `/tools`.
-  - **Account Settings (SSTI):** Verified template injection via personalization engine on `/settings`.
+- **ShadowWork Productivity Suite (Port 8080):**
+  - **Task Manager (Stored XSS):** Verified script injection in task content.
+  - **Expense Vault (SQLi / IDOR):** Verified SQLi in search and IDOR in receipt viewing (`/receipt/<id>`).
+  - **Integration Hub (SSRF):** Verified internal service probing via webhook sync tool.
+  - **System Ops (RCE):** Verified command injection in restricted maintenance diagnostics.
+  - **Account Settings (SSTI):** Verified template injection via personalization engine (Custom Theme parameter) on `/settings`.
 - **Apache Gateway (Port 80):**
-  - **Shellshock RCE:** Verified! Supports standard paths like `/cgi-bin/test.cgi` and `/cgi-bin/status.cgi`.
+  - **Shellshock RCE:** Fully verified on standard CGI paths.
 
 
 ### 3. Data & Environment Population
@@ -28,10 +28,10 @@ A suite of Python scripts has been provided in the `shadownet/exploits/` directo
 - `xss_exploit.py`: Injects and verifies stored XSS.
 - `idor_exploit.py`: Enumerates user profiles.
 - `rce_exploit.py`: Obtains OS command execution.
-- `ssrf_exploit.py`: Probes internal services.
-- `ssti_exploit.py`: Leaks server configuration.
-- `shellshock_exploit.py`: Verified RCE on Apache.
-- `infra_tests.py`: Tests FTP, SSH, MySQL, Redis, and LDAP.
+- `ssrf_exploit.py`: Probes internal services via webhook sync.
+- `ssti_exploit.py`: Leaks server configuration via personalization engine.
+- `shellshock_exploit.py`: Verified RCE on Apache CGI.
+- `infra_tests.py`: Comprehensive test for FTP, SSH, MySQL, Redis, and LDAP.
 
 
 ## Implementation Details

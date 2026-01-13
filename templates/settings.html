@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Account Settings</h1>
+<p>Personalize your ShadowWork experience and configure your dashboard preferences.</p>
+
+<div class="card">
+    <h3>Interface Preferences</h3>
+    <form method="GET" action="/settings">
+        <label for="theme_select">Select Dashboard Theme:</label>
+        <div style="display: flex; gap: 1rem;">
+            <select id="theme_select" name="theme">
+                <option value="Standard" {% if theme=='Standard' %}selected{% endif %}>Standard Obsidian</option>
+                <option value="Astra" {% if theme=='Astra' %}selected{% endif %}>Astra Violet</option>
+                <option value="Emerald" {% if theme=='Emerald' %}selected{% endif %}>Emerald Forest</option>
+                <option value="Custom" {% if theme not in ['Standard', 'Astra' , 'Emerald' ] %}selected{% endif %}>
+                    Custom (Legacy Engine)</option>
+            </select>
+            <button type="submit" class="btn">Apply Theme</button>
+        </div>
+        <p style="font-size: 0.85rem; margin-top: 1rem;">Note: Custom themes are processed via our <em>Legacy
+                Personalization Engine v2.0</em> for backward compatibility.</p>
+    </form>
+</div>
+
+<div class="card" style="border-left: 4px solid var(--primary);">
+    <h3>Applied Configuration</h3>
+    <p>Active Personalization Profile: <strong>{{ theme_display | safe }}</strong></p>
+    <p>Status: <span style="color: var(--success);">Config Loaded Successfully</span></p>
+</div>
+{% endblock %}

@@ -166,18 +166,13 @@ def maintenance():
 def settings():
     if 'user_id' not in session: return redirect(url_for('login'))
     user_pref = request.args.get('theme', 'Standard')
-    # VULNERABILITY: SSTI
-    template = f"""
-    {{% extends "base.html" %}}
-    {{% block content %}}
-    <h1>Account Settings</h1>
-    <div class="card">
-        <h3>Current Theme: {user_pref}</h3>
-        <p>Personalize your ShadowWork experience.</p>
-    </div>
-    {{% endblock %}}
-    """
-    return render_template_string(template)
+    
+    # VULNERABILITY: SSTI (The parameter is injected directly into a template string)
+    # We use a helper template to show the UI, but the "display" part is vulnerable
+    display_template = f"<span>{user_pref}</span>"
+    theme_display = render_template_string(display_template)
+    
+    return render_template('settings.html', theme=user_pref, theme_display=theme_display)
 
 @app.route('/logout')
 def logout():
