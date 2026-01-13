@@ -11,6 +11,8 @@ services:
       - "3306:3306" # MySQL
       - "6379:6379" # Redis
       - "389:389" # LDAP
+      - "30000-30009:30000-30009" # FTP Passive Ports
+
     restart: unless-stopped
     volumes:
       - /tmp/shadownet_db:/tmp

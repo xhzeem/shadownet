@@ -41,7 +41,7 @@ RUN apt-get update && \
     bash \
     mariadb-server \
     openssh-server \
-    vsftpd \
+    pure-ftpd \
     redis-server \
     supervisor \
     curl \
@@ -49,7 +49,10 @@ RUN apt-get update && \
     sqlite3 \
     libtinfo5 \
     slapd \
-    ldap-utils && \
+    ldap-utils \
+    libnss-ldapd \
+    libpam-ldapd \
+    nslcd && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
@@ -107,7 +110,7 @@ COPY scripts/config.bak /var/ftp/pub/config.bak
 RUN echo "ShadowNet{FTP_An0n_Access_Succ3ss}" > /var/ftp/pub/flag.txt
 
 # Setup LDAP (Anonymous)
-COPY ldap/data.ldif /tmp/data.ldif
+COPY ldap/data.ldif /etc/ldap/data.ldif
 COPY scripts/ldap_init.sh /usr/local/bin/ldap_init.sh
 RUN chmod +x /usr/local/bin/ldap_init.sh
 # LDAP re-configuration for non-interactive setup is already handled above

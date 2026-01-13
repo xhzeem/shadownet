@@ -18,8 +18,8 @@ ShadowNet is a consolidated pentest lab contained within a single machine (Docke
 ### 3. Data & Environment Population
 - **MySQL:** Populated with `internal_logs` and multiple user roles (`ceo`, `dev`).
 - **Redis:** Populated with mock sessions and the `SECRET_ADMIN_TOKEN` flag.
-- **LDAP:** Populated with "ShadowCorp" directory structure and employee uids.
-- **FTP:** Added `config.bak` and a `flag.txt` to the public directory.
+- **LDAP:** Populated with "ShadowCorp" directory structure, employee uids, and an LDAP-SSH pivot flag.
+- **FTP:** Added `config.bak` and a `flag.txt` to the public directory using a Python-based server for compatibility.
 - **SSH:** Populated `service` home directory with `notes.txt` and `.bash_history`.
 
 ## Exploit Scripts
@@ -31,6 +31,8 @@ A suite of Python scripts has been provided in the `shadownet/exploits/` directo
 - `ssrf_exploit.py`: Probes internal services via webhook sync.
 - `ssti_exploit.py`: Leaks server configuration via personalization engine.
 - `shellshock_exploit.py`: Verified RCE on Apache CGI.
+- `ldap_exploit.py`: Lists directory entries and extracts leaked passwords.
+- `ssh_exploit.py`: Verifies credential access and supports LDAP-SSH pivot.
 - `infra_tests.py`: Comprehensive test for FTP, SSH, MySQL, Redis, and LDAP.
 
 
@@ -41,6 +43,7 @@ A suite of Python scripts has been provided in the `shadownet/exploits/` directo
   - Manually installed vulnerable `bash 4.3` for Shellshock.
   - Flask app uses raw string interpolation and `subprocess.check_output(shell=True)`.
   - Infrastructure configs stripped of authentication/security headers.
+- **SSH Pivot:** Container configured with `libpam-ldapd` to allow SSH logins for LDAP users (e.g., `jsmith`).
 
 ## Documentation
 - A comprehensive [README.md](file:///Users/xhzeem/Desktop/lab333/shadownet/README.md) is included with exploitation guides for each vulnerability.

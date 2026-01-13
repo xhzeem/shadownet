@@ -25,9 +25,11 @@ if [ $COUNT -eq $MAX_RETRIES ]; then
 fi
 
 # Load the data if it exists
-if [ -f /tmp/data.ldif ]; then
-    echo "Loading mock data into LDAP..."
-    ldapadd -c -x -D "cn=admin,dc=shadownet,dc=local" -w admin -f /tmp/data.ldif || echo "Some entries might already exist or failed."
+if [ -f /etc/ldap/data.ldif ]; then
+    echo "Loading mock data into LDAP using slapadd..."
+    # Use slapadd for offline insertion to bypass credential issues
+    slapadd -c -l /etc/ldap/data.ldif || echo "Some entries might already exist or failed."
+    chown -R openldap:openldap /var/lib/ldap
 fi
 
 # Stop the background slapd

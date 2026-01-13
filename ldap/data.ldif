@@ -19,8 +19,21 @@ mail: jdoe@shadownet.local
 
 dn: cn=Jane Smith,ou=People,dc=shadownet,dc=local
 objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
 cn: Jane Smith
 sn: Smith
 uid: jsmith
+uidNumber: 2000
+gidNumber: 2000
+homeDirectory: /home/jsmith
+loginShell: /bin/bash
 userPassword: secretpassword
 mail: jsmith@shadownet.local
+description: ShadowNet{LDAP_Piv0t_SSH} - Password: secretpassword
+
+dn: cn=Flag Holder,ou=People,dc=shadownet,dc=local
+objectClass: inetOrgPerson
+cn: Flag Holder
+sn: Flag
+description: ShadowNet{LDAP_An0nym0us_B1nd_FTW}

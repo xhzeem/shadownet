@@ -1,0 +1,5 @@
+dn: cn=Flag Holder,ou=People,dc=shadownet,dc=local
+objectClass: inetOrgPerson
+cn: Flag Holder
+sn: Flag
+description: ShadowNet{LDAP_An0nym0us_B1nd_FTW}
