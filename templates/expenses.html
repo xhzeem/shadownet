@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Expense Vault</h1>
+<p>Audit and manage your business expenses. All claims are stored securely in the vault.</p>
+
+<div class="card">
+    <form method="GET">
+        <div style="display: flex; gap: 1rem;">
+            <input type="text" name="q" placeholder="Search expenses by description..."
+                value="{{ request.args.get('q', '') }}">
+            <button type="submit" class="btn">Filter</button>
+        </div>
+    </form>
+</div>
+
+<h3>Logged Expenses</h3>
+<div class="card" style="padding: 0; overflow: hidden;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+            <tr
+                style="background: var(--surface-accent); color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase;">
+                <th style="padding: 1.25rem;">Category</th>
+                <th style="padding: 1.25rem;">Description</th>
+                <th style="padding: 1.25rem;">Amount</th>
+                <th style="padding: 1.25rem;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 1.25rem;"><span class="badge">{{ expense.category }}</span></td>
+                <td style="padding: 1.25rem; font-weight: 500;">{{ expense.description }}</td>
+                <td style="padding: 1.25rem; color: var(--success); font-weight: 600;">${{ "%.2f"|format(expense.amount)
+                    }}</td>
+                <td style="padding: 1.25rem;">
+                    <a href="/receipt/{{ expense.receipt_id }}"
+                        style="color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600;">View
+                        Receipt</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,28 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Welcome to ShadowNet Monolith</h1>
-<p>This is a vulnerable machine simulation containing multiple services. This specific web application is the
-    <strong>Shadow-Flask</strong> gateway.</p>
 <div class="card">
-    <h3>Available Vulnerabilities:</h3>
-    <ul>
-        <li><strong>SQL Injection:</strong> Try bypassing the login form.</li>
-        <li><strong>Stored XSS:</strong> Can you inject a script into the guestbook?</li>
-        <li><strong>IDOR:</strong> Access other profiles once logged in.</li>
-        <li><strong>RCE:</strong> Execute commands through the network utility.</li>
-        <li><strong>SSRF:</strong> Access internal services (Redis, LDAP, MySQL) from the fetch tool.</li>
-        <li><strong>SSTI:</strong> Manipulate the greeting template.</li>
-    </ul>
+    <h1>Welcome, ShadowCorp Personnel</h1>
+    <p>The ShadowNet Internal Portal is your unified command center for communication, administration, and network
+        management.</p>
 </div>
-<div class="card" style="border-left-color: #44ff44;">
-    <h3>Other Exposed Services:</h3>
-    <ul>
-        <li><strong>Port 80:</strong> Apache Gateway (Shellshock RCE)</li>
-        <li><strong>Port 21:</strong> FTP (Anonymous Access)</li>
-        <li><strong>Port 2222:</strong> SSH (service:password)</li>
-        <li><strong>Port 3306:</strong> MySQL (root:root)</li>
-        <li><strong>Port 6379:</strong> Redis (No Auth)</li>
-        <li><strong>Port 389:</strong> LDAP (Anonymous Bind)</li>
-    </ul>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <div class="card">
+        <h3>System Overview</h3>
+        <p>Status: <span style="color: var(--success); font-weight: bold;">ALL SYSTEMS OPERATIONAL</span></p>
+        <p>Last Audit: Today, 08:30 AM</p>
+        <p>Security Level: <strong>ORANGE</strong></p>
+    </div>
+
+    <div class="card">
+        <h3>Active Modules</h3>
+        <ul style="color: var(--text-muted); padding-left: 1.2rem;">
+            <li>CorpFeed Internal Social Network</li>
+            <li>Personnel Directory v4.1</li>
+            <li>Network Diagnostic Toolkit</li>
+            <li>Employee Personalization Engine</li>
+        </ul>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Internal Bulletins</h3>
+    <div style="border-left: 2px solid var(--primary); padding-left: 1rem; margin-top: 1rem;">
+        <p style="margin-bottom: 0.5rem; font-weight: 600;">Reminder: Password Rotation</p>
+        <p style="font-size: 0.9rem;">Please ensure your system password meets our new complexity requirements. Weak
+            credentials like "admin123" are strictly prohibited.</p>
+    </div>
 </div>
 {% endblock %}

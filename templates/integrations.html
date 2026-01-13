@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Integration Hub</h1>
+<p>Connect ShadowWork with your existing cloud tools and webhooks. Provide a source URL to sync internal resources.</p>
+
+<div class="card">
+    <h3>Configure Webhook Sync</h3>
+    <form method="POST">
+        <label>Resource Source URL:</label>
+        <div style="display: flex; gap: 1rem;">
+            <input type="text" name="url" placeholder="http://api.internal/v1/sync" required>
+            <button type="submit" class="btn">Initialize Sync</button>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Verified endpoints: Slack, Jira, Internal-Vault</p>
+    </form>
+</div>
+
+{% if content %}
+<h3>Sync Preview Output</h3>
+<div class="card" style="background: #000; color: #fff; overflow: auto; max-height: 500px;">
+    <code><pre>{{ content }}</pre></code>
+</div>
+{% endif %}
+{% endblock %}

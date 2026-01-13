@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="header-bar">
+    <h1>Welcome back, {{ user.username }}</h1>
+    <div class="badge">{{ user.role }} Profile</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3rem;">
+    <div class="card">
+        <h3 style="color: var(--primary);">Active Tasks</h3>
+        <p style="font-size: 2.5rem; font-weight: 700; color: var(--text); margin: 0.5rem 0;">{{ task_count }}</p>
+        <p>In your personal queue</p>
+    </div>
+
+    <div class="card">
+        <h3 style="color: var(--success);">Expenses Total</h3>
+        <p style="font-size: 2.5rem; font-weight: 700; color: var(--text); margin: 0.5rem 0;">${{
+            "%.2f"|format(expense_sum) }}</p>
+        <p>Pending reimbursement</p>
+    </div>
+
+    <div class="card">
+        <h3 style="color: #fbbf24;">System Status</h3>
+        <p style="font-size: 1.1rem; font-weight: 600; color: var(--text); margin: 1rem 0;">Connected</p>
+        <p>Lab Environment v4.0</p>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Quick Insights</h3>
+    <p>The ShadowWork suite has been updated to the latest corporate security standards. Ensure you use the
+        <strong>Integrations</strong> hub to sync your external assets and the <strong>Expense Vault</strong> for all
+        travel claims.</p>
+    <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+        <a href="/tasks" class="btn">View All Tasks</a>
+        <a href="/expenses" class="btn" style="background: var(--surface-accent);">Reports</a>
+    </div>
+</div>
+{% endblock %}

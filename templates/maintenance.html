@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>System Ops Dashboard</h1>
+<p style="color: var(--danger); font-weight: 600;">RESTRICTED: Administrator Core Authorization Required.</p>
+
+<div class="card">
+    <h3>Maintenance Utilities</h3>
+    <p>Perform system integrity checks and connectivity diagnostics on the monolithic node.</p>
+    <form method="POST">
+        <input type="hidden" name="tool" value="check">
+        <label>Monolith Target Node (Host/IP):</label>
+        <div style="display: flex; gap: 1rem;">
+            <input type="text" name="target" placeholder="e.g. 127.0.0.1" required>
+            <button type="submit" class="btn" style="background: var(--danger);">Run Diagnostic</button>
+        </div>
+    </form>
+</div>
+
+{% if output %}
+<h3>Process Log Output</h3>
+<pre>{{ output }}</pre>
+{% endif %}
+{% endblock %}

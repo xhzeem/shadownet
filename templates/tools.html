@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>NetTools Dashboard</h1>
+<p>Internal network diagnostic and resource management utilities.</p>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <!-- Ping Diagnostic -->
+    <div class="card">
+        <h3>Ping Diagnostic</h3>
+        <p>Test connectivity to internal or external hosts.</p>
+        <form method="POST">
+            <input type="hidden" name="tool" value="ping">
+            <label>Target Host/IP:</label>
+            <input type="text" name="target" placeholder="e.g. 10.0.0.1" required>
+            <button type="submit" class="btn">Execute Diagnostic</button>
+        </form>
+    </div>
+
+    <!-- Resource Fetcher -->
+    <div class="card">
+        <h3>External Resource Fetcher</h3>
+        <p>Retrieve and cache contents from remote endpoints.</p>
+        <form method="POST">
+            <input type="hidden" name="tool" value="fetch">
+            <label>Source URL:</label>
+            <input type="text" name="url" placeholder="http://api.internal/v1" required>
+            <button type="submit" class="btn">Fetch Resource</button>
+        </form>
+    </div>
+</div>
+
+{% if output %}
+<div class="card">
+    <h3>Command Output</h3>
+    <pre>{{ output }}</pre>
+</div>
+{% endif %}
+{% endblock %}

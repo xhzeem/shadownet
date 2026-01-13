@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Task Manager</h1>
+<p>Organize your workflow and track project milestones efficiently.</p>
+
+<div class="card">
+    <h3>Create New Task</h3>
+    <form method="POST">
+        <div style="display: grid; grid-template-columns: 1fr 200px; gap: 1rem;">
+            <input type="text" name="title" placeholder="Task Title (e.g. Server Maintenance)" required>
+            <select name="priority">
+                <option>Normal Priority</option>
+                <option style="color: var(--danger);">High Priority</option>
+            </select>
+        </div>
+        <textarea name="content" rows="4" placeholder="Detailed description of the task..." required></textarea>
+        <button type="submit" class="btn">Add Task to Queue</button>
+    </form>
+</div>
+
+<h3>Current To-Do List</h3>
+{% for task in tasks %}
+<div class="card" style="padding: 1.5rem;">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <h3 style="margin: 0;">{{ task.title }}</h3>
+        <span class="badge" style="background: var(--primary); color: #fff;">{{ task.status }}</span>
+    </div>
+    <div style="color: var(--text);">
+        {{ task.content | safe }}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

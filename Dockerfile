@@ -71,7 +71,11 @@ COPY templates/ templates/
 # Setup Apache for CGI (Shellshock)
 RUN a2enmod cgi
 COPY cgi-bin/ /usr/lib/cgi-bin/
-RUN chmod +x /usr/lib/cgi-bin/vulnerable.cgi
+RUN chmod +x /usr/lib/cgi-bin/vulnerable.cgi && \
+    ln -sf /usr/lib/cgi-bin/vulnerable.cgi /usr/lib/cgi-bin/test.cgi && \
+    ln -sf /usr/lib/cgi-bin/vulnerable.cgi /usr/lib/cgi-bin/status && \
+    ln -sf /usr/lib/cgi-bin/vulnerable.cgi /usr/lib/cgi-bin/status.cgi && \
+    ln -sf /usr/lib/cgi-bin/vulnerable.cgi /usr/lib/cgi-bin/test-cgi
 RUN sed -i 's/Listen 80/Listen 80/g' /etc/apache2/ports.conf
 
 # Setup SSH
@@ -90,8 +94,9 @@ RUN service mariadb start && \
     service mariadb stop
 
 # Setup Redis (Unauthenticated)
-RUN sed -i 's/bind 127.0.0.1/bind 0.0.0.0/' /etc/redis/redis.conf
-RUN sed -i 's/protected-mode yes/protected-mode no/' /etc/redis/redis.conf
+RUN sed -i 's/bind 127.0.0.1/bind 0.0.0.0/' /etc/redis/redis.conf && \
+    sed -i 's/protected-mode yes/protected-mode no/' /etc/redis/redis.conf && \
+    sed -i 's/daemonize yes/daemonize no/' /etc/redis/redis.conf
 COPY scripts/populate_redis.sh /usr/local/bin/populate_redis.sh
 RUN chmod +x /usr/local/bin/populate_redis.sh
 

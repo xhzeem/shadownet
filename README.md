@@ -21,8 +21,13 @@ ShadowNet runs on a single monolithic container with the following services expo
 
 | Service | Port | Description |
 | :--- | :--- | :--- |
-| **Apache Gateway** | 80 | Web server vulnerable to **Shellshock (CVE-2014-6271)**. |
-| **Shadow-Flask** | 5001 | Multi-vulnerable Flask App (SQLi, XSS, IDOR, RCE, SSRF, SSTI). |
+| **Apache Gateway** | 80 | External gateway vulnerable to **Shellshock (CVE-2014-6271)**. |
+| **ShadowWork Suite** | 8080 | Productivity Suite with Task Manager, Expense Vault, and Integrations. |
+
+> [!WARNING]
+> **MacOS Users:** Port 5000 is often used by **AirPlay Receiver (AirTunes)**. 
+> The Flask application is mapped to **Port 8080** internally and externally in this lab to avoid this conflict. 
+> If you see a `403 Forbidden` from `AirTunes` on port 5000, use `http://localhost:8080`.
 | **FTP** | 21 | Exposed with `anonymous` access enabled. |
 | **SSH** | 2222 | Weak credentials (`service:password`). |
 | **MySQL** | 3306 | Standard port, weak credentials (`root:root`). |

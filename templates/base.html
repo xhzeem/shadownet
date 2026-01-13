@@ -4,103 +4,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShadowNet - Monolith</title>
+    <title>ShadowWork | Productivity Redefined</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-glow: rgba(139, 92, 246, 0.3);
+            --bg: #030712;
+            --surface: #111827;
+            --surface-accent: #1f2937;
+            --text: #f9fafb;
+            --text-muted: #9ca3af;
+            --border: #374151;
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #121212;
-            color: #e0e0e0;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
-            padding: 0;
-        }
-
-        nav {
-            background: #1f1f1f;
-            padding: 1rem;
-            border-bottom: 2px solid #ff4444;
             display: flex;
-            gap: 1rem;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        nav a {
-            color: #e0e0e0;
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 3.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            letter-spacing: -0.025em;
+        }
+
+        .logo svg {
+            color: var(--primary);
+            filter: drop-shadow(0 0 8px var(--primary-glow));
+        }
+
+        .nav-group {
+            margin-bottom: 2rem;
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
             text-decoration: none;
-            font-weight: bold;
+            padding: 0.85rem 1rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
         }
 
-        nav a:hover {
-            color: #ff4444;
+        .nav-link:hover {
+            background: var(--surface-accent);
+            color: var(--text);
         }
 
-        .container {
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 1400px;
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        /* Cards & Components */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
             padding: 2rem;
-            max-width: 800px;
-            margin: auto;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            border-color: var(--primary);
         }
 
         h1 {
-            color: #ff4444;
+            font-size: 2.25rem;
+            margin: 0;
+            letter-spacing: -0.05em;
         }
 
-        .card {
-            background: #1e1e1e;
-            padding: 1.5rem;
-            border-radius: 8px;
+        h3 {
+            font-size: 1.25rem;
             margin-bottom: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            border-left: 4px solid #ff4444;
+            color: var(--text);
         }
 
-        input[type="text"],
-        input[type="password"],
-        textarea {
-            width: 100%;
-            padding: 0.5rem;
-            margin: 0.5rem 0;
-            background: #2c2c2c;
-            border: 1px solid #444;
-            color: #fff;
-            border-radius: 4px;
+        p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1rem;
         }
 
-        button {
-            background: #ff4444;
+        .btn {
+            background: var(--primary);
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 4px;
+            border-radius: 0.75rem;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        button:hover {
-            background: #cc0000;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px var(--primary-glow);
         }
 
-        .error {
-            color: #ff6666;
-            margin-bottom: 1rem;
+        input,
+        textarea,
+        select {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.85rem 1.25rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.25rem;
+            outline: none;
+            font-family: inherit;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: var(--surface-accent);
+            color: var(--primary);
         }
 
         pre {
             background: #000;
-            padding: 1rem;
-            color: #00ff00;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            color: var(--success);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
             overflow-x: auto;
+            border: 1px solid var(--border);
         }
     </style>
 </head>
 
 <body>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/login">Login (SQLi)</a>
-        <a href="/guestbook">Guestbook (XSS)</a>
-        <a href="/ping">Ping Unit (RCE)</a>
-        <a href="/fetch">URL Fetch (SSRF)</a>
-        <a href="/greet?name=Friend">Greet (SSTI)</a>
-    </nav>
-    <div class="container">
+    <div class="sidebar">
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                    d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+            </svg>
+            ShadowWork
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-label">General</div>
+            <a href="/" class="nav-link">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+                Dashboard
+            </a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-label">Productivity</div>
+            <a href="/tasks" class="nav-link">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M9 11l3 3L22 4" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Task Manager
+            </a>
+            <a href="/expenses" class="nav-link">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <line x1="2" y1="10" x2="22" y2="10" />
+                </svg>
+                Expense Vault
+            </a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-label">System</div>
+            <a href="/integrations" class="nav-link">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                </svg>
+                Integrations
+            </a>
+            <a href="/admin/maintenance" class="nav-link">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path
+                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                </svg>
+                System Ops
+            </a>
+        </div>
+
+        <div style="margin-top: auto;">
+            <a href="/settings" class="nav-link">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+                Settings
+            </a>
+            <a href="/logout" class="nav-link" style="color: var(--danger);">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <div class="main-content">
         {% block content %}{% endblock %}
     </div>
 </body>

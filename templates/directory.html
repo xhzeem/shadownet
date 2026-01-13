@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Personnel Directory</h1>
+<p>Browse through the ShadowCorp employee database. Click a profile to view detailed information.</p>
+
+<div class="card">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem;">
+        {% for user in users %}
+        <a href="/directory/{{ user.id }}" style="text-decoration: none;">
+            <div style="background: var(--bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 0.75rem; text-align: center; transition: transform 0.2s;"
+                onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div
+                    style="width: 60px; height: 60px; background: var(--surface); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 2px solid var(--primary);">
+                    {{ user.username[0] | upper }}
+                </div>
+                <div style="font-weight: 600; color: var(--text);">{{ user.username }}</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">{{ user.role }}</div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

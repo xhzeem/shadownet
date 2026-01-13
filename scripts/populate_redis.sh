@@ -1,4 +1,10 @@
 #!/bin/bash
+# Wait for Redis to be ready
+until redis-cli ping > /dev/null 2>&1; do
+  echo "Waiting for Redis to start..."
+  sleep 1
+done
+
 # Populate Redis with mock data
 redis-cli set "SYSTEM_VERSION" "v1.4.2-beta"
 redis-cli set "FLAG_INTERNAL_PORT_SCAN" "enabled"
