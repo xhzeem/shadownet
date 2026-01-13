@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Network Diagnostic Unit</h1>
+<div class="card">
+    <form method="POST">
+        <label>Enter Host/IP to Ping:</label>
+        <input type="text" name="ip" placeholder="8.8.8.8" required>
+        <button type="submit">Execute Ping</button>
+    </form>
+</div>
+{% if output %}
+<h3>Command Output:</h3>
+<pre>{{ output }}</pre>
+{% endif %}
+{% endblock %}

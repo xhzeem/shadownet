@@ -1,0 +1,6 @@
+# ShadowNet Internal Notes - TOP SECRET
+
+- Remember to fix the Shellshock vulnerability on the CGI gateway.
+- The Redis server is currently open to the whole network... probably should fix that.
+- User 'service' has the password 'password'. Very insecure.
+- The Flag for LDAP search is: ShadowNet{LDAP_An0nym0us_B1nd_FTW}

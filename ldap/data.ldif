@@ -1,0 +1,26 @@
+dn: dc=shadownet,dc=local
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: ShadowNet Corporation
+dc: shadownet
+
+dn: ou=People,dc=shadownet,dc=local
+objectClass: organizationalUnit
+ou: People
+
+dn: cn=John Doe,ou=People,dc=shadownet,dc=local
+objectClass: inetOrgPerson
+cn: John Doe
+sn: Doe
+uid: jdoe
+userPassword: password123
+mail: jdoe@shadownet.local
+
+dn: cn=Jane Smith,ou=People,dc=shadownet,dc=local
+objectClass: inetOrgPerson
+cn: Jane Smith
+sn: Smith
+uid: jsmith
+userPassword: secretpassword
+mail: jsmith@shadownet.local

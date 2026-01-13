@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Internal Login</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<div class="card">
+    <form method="POST">
+        <label>Username:</label>
+        <input type="text" name="username" required>
+        <label>Password:</label>
+        <input type="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+<p style="color: #666; font-size: 0.8rem;">Hint: Try ' OR '1'='1 --</p>
+{% endblock %}

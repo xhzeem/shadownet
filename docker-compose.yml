@@ -1,0 +1,16 @@
+services:
+  shadownet:
+    build: .
+    platform: linux/amd64
+    container_name: shadownet-machine
+    ports:
+      - "80:80" # Apache (Shellshock)
+      - "5001:5000" # Flask (Multi-vuln)
+      - "21:21" # FTP
+      - "2222:22" # SSH (mapped to 2222 to avoid conflict)
+      - "3306:3306" # MySQL
+      - "6379:6379" # Redis
+      - "389:389" # LDAP
+    restart: unless-stopped
+    volumes:
+      - /tmp/shadownet_db:/tmp

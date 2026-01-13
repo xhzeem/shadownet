@@ -1,0 +1,5 @@
+# ShadowNet FTP Public Directory
+ls -la
+cat config.bak
+ssh service@localhost -p 2222
+exit

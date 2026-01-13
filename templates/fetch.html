@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Remote URL Fetcher</h1>
+<div class="card">
+    <form method="POST">
+        <label>Enter URL to Fetch:</label>
+        <input type="text" name="url" placeholder="http://localhost:6379" required>
+        <button type="submit">Fetch</button>
+    </form>
+</div>
+{% if content %}
+<h3>Fetched Content:</h3>
+<div class="card" style="background: #000; color: #fff; overflow: auto; max-height: 400px;">
+    <code><pre>{{ content }}</pre></code>
+</div>
+{% endif %}
+{% endblock %}
